@@ -2,145 +2,155 @@
 <html lang="hu">
 <head>
   <meta charset="UTF-8" />
-  <title>Wemender GJU · Jegyvásárlás</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wemender GJU – Előszilveszteri buli</title>
   <link rel="stylesheet" href="styles.css" />
-  <!-- QR code library for ticket confirmation view -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="main.js" defer></script>
 </head>
 <body>
-  <header class="topbar">
-    <div class="container topbar-inner">
-      <div class="logo">Wemender <span>GJU</span></div>
-      <nav class="nav">
-        <a href="#tickets">Jegyek</a>
-        <a href="#tables">Asztalfoglalás</a>
-        <a href="#event">Esemény</a>
-      </nav>
+  <header class="site-header">
+    <div class="logo">
+      <span class="logo-main">Wemender</span>
+      <span class="logo-sub">GJU</span>
     </div>
+    <nav class="nav">
+      <a href="#details" class="btn btn-primary nav-btn">Részletek</a>
+      <a href="#tickets" class="btn btn-primary nav-btn">Jegyfoglalás</a>
+      <a href="#reservation" class="btn btn-primary nav-btn">Asztalfoglalás</a>
+      <a href="my-tickets.html" class="btn btn-primary nav-btn">Saját jegyeim</a>
+      <a href="login.html" class="btn btn-primary nav-btn">Bejelentkezés</a>
+      <a href="register.html" class="btn btn-primary nav-btn">Regisztráció</a>
+      <a href="admin.html" class="btn btn-primary nav-btn">Admin</a>
+    </nav>
   </header>
 
   <main>
-    <section class="hero" id="event">
-      <div class="container hero-inner">
-        <div class="hero-text">
-          <h1>Wemender GJU 2025</h1>
-          <p class="hero-sub">
-            Exkluzív rendezvény · 2025. december 29. · Névreszóló jegyek, QR-kódos beléptetés.
-          </p>
-          <ul class="hero-list">
-            <li>Névreszóló jegyek – minden belépőhöz név szükséges</li>
-            <li>Online asztalfoglalás</li>
-            <li>QR-kódos jegyellenőrzés a helyszínen</li>
-          </ul>
-          <a href="#tickets" class="btn-primary">Jegyvásárlás</a>
-        </div>
-        <div class="hero-card">
-          <h2>Esemény információk</h2>
-          <p><strong>Dátum:</strong> 2025.12.29.</p>
-          <p><strong>Szervező:</strong> Wemender GJU</p>
-          <p><strong>Helyszín:</strong> Hamarosan...</p>
-          <p class="hero-note">Foglalj jegyet és asztalt online, hogy biztosan legyen helyed!</p>
-        </div>
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Wemender GJU Előszilveszter</h1>
+        <p>Egy este, ahol a GJU közösen indítja az év végét – zene, hangulat, jó társaság.</p>
+        <a href="#tickets" class="btn btn-primary cta-btn">Jegyet veszek</a>
       </div>
     </section>
 
-    <section id="tickets" class="section">
-      <div class="container grid-2">
-        <div class="card">
-          <h2>Jegyvásárlás</h2>
-          <form id="ticket-form" class="form">
-            <label>
-              Teljes név*
-              <input type="text" name="name" required placeholder="Vezetéknév Keresztnév" />
-            </label>
-            <label>
-              E-mail cím*
-              <input type="email" name="email" required placeholder="te@pelda.hu" />
-            </label>
-            <label>
-              Jegytípus*
-              <select name="ticket_type" required>
-                <option value="normal">Normál jegy – 5000 Ft</option>
-                <option value="vip">Jegy + vacsora – 9000 Ft</option>
-              </select>
-            </label>
-            <label>
-              Jegyek száma*
-              <input type="number" name="quantity" min="1" value="1" required />
-            </label>
-            <button type="submit" class="btn-primary full-width">Jegyek foglalása</button>
-            <p class="small">
-              A fizetés jelenleg helyszínen történik. A foglalásról visszaigazoló e-mailt küldünk.
-            </p>
-            <div id="ticket-error" class="form-error"></div>
-          </form>
-        </div>
+    <!-- RÉSZLETES INFÓK -->
+    <section id="details" class="card">
+      <h2>Rendezvény részletei</h2>
+      <p class="section-desc">
+      </p>
 
-        <div class="card" id="ticket-result-card" style="display:none;">
-          <h2>Jegyed adatai</h2>
-          <div id="ticket-summary"></div>
-          <div id="qrcode" class="qrcode"></div>
-          <p class="small">
-            A fenti QR-kódot mutasd be belépéskor. A QR a jegyed egyedi azonosítóját tartalmazza,
-            amit a helyszínen ellenőrzünk.
-          </p>
+      <div class="details-grid">
+        <div>
+          <h3>Időpont</h3>
+          <p><strong>2025. december 29., 18:00</strong>, kapunyitás: <strong>19:00</strong></p>
         </div>
-      </div>
-    </section>
-
-    <section id="tables" class="section section-alt">
-      <div class="container grid-2">
-        <div class="card">
-          <h2>Asztalfoglalás</h2>
-          <form id="reservation-form" class="form">
-            <label>
-              Kapcsolattartó név*
-              <input type="text" name="name" required />
-            </label>
-            <label>
-              E-mail cím*
-              <input type="email" name="email" required />
-            </label>
-            <label>
-              Telefonszám
-              <input type="tel" name="phone" />
-            </label>
-            <label>
-              Létszám*
-              <input type="number" name="guests" min="1" value="4" required />
-            </label>
-            <label>
-              Megjegyzés
-              <textarea name="notes" rows="3" placeholder="Pl. külön kérés, allergia, stb."></textarea>
-            </label>
-            <button type="submit" class="btn-outline full-width">Asztal foglalása</button>
-            <div id="reservation-error" class="form-error"></div>
-            <div id="reservation-success" class="form-success"></div>
-          </form>
+        <div>
+          <h3>Helyszín</h3>
+          <p><strong>Véméndi Sportcsarnok</strong><br />7726 Véménd, Zrínyi Miklós u. 1</p>
         </div>
-
-        <div class="card">
-          <h2>Miért érdemes előre foglalni?</h2>
-          <ul class="hero-list">
-            <li>Biztos helyet kapsz a barátaiddal egy asztalnál</li>
-            <li>Gyorsabb beléptetés a helyszínen</li>
-            <li>Jegy + vacsora opcióval prémium asztalokat foglalhatsz</li>
+        <div>
+          <h3>Jegytípusok</h3>
+          <ul>
+            <li><strong>Belépő:</strong> Báli belépő</li>
+            <li><strong>Belépő + Vacsora:</strong> Báli belépő <em>+ meleg vacsora</em></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Program</h3>
+          <ul>
+            <li>18:00 – 20:00 Kulturális műsor</li>
+            <li>20:00 – 21:00 Vacsora</li>
+            <li>21:00-tól Sextett bál</li>
+            <li>00:00 – Éjféli ünnepi pezsgős köszöntő, vacsora és tombola</li>
           </ul>
         </div>
       </div>
+
+      <p class="section-note">
+        <strong>Fontos:</strong> a jegyvásárlás csak <strong>regisztrált és bejelentkezett</strong> felhasználóknak elérhető.
+      </p>
+    </section>
+
+    <!-- JEGYVÁSÁRLÁS -->
+    <section id="tickets" class="card">
+      <h2>Jegyvásárlás</h2>
+      <p class="section-desc">
+        Jelentkezz be vagy regisztrálj, majd töltsd ki az űrlapot. A jegyeidet a
+        <strong>Saját jegyeim</strong> menüpont alatt is meg fogod találni. <strong> FONTOS: Ez a itt csak jegyet foglalsz. A foglalásra emailban fogunk válaszolni. </strong>
+      </p>
+
+      <div id="ticket-auth-info" class="message" hidden></div>
+
+      <form id="ticket-form" class="form">
+        <div class="form-row">
+          <label for="ticket-name">Név</label>
+          <input type="text" id="ticket-name" name="name" required />
+        </div>
+        <div class="form-row">
+          <label for="ticket-email">E-mail (a fiókod e-mail címe)</label>
+          <input type="email" id="ticket-email" name="email" required />
+        </div>
+        <div class="form-row">
+          <label for="ticket-type">Jegytípus</label>
+          <select id="ticket-type" name="ticket_type" required>
+            <option value="normal" selected>Belépő</option>
+            <option value="dinner">Belépő + vacsora</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="ticket-quantity">Mennyiség</label>
+          <input type="number" id="ticket-quantity" name="quantity" min="1" value="1" required />
+        </div>
+        <div class="form-row">
+          <label for="ticket-total">Végösszeg (Ft)</label>
+          <input type="number" id="ticket-total" name="total_price" readonly />
+          <small class="help-text">
+            Az ár automatikusan számolódik a kiválasztott jegytípus alapján.
+          </small>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="ticket-submit-btn">Jegy vásárlása</button>
+      </form>
+
+      <div id="ticket-message" class="message" hidden></div>
+    </section>
+
+    <!-- ASZTALFOGLALÁS -->
+    <section id="reservation" class="card">
+      <h2>Asztalfoglalás</h2>
+      <p class="section-desc">
+        Foglalj asztalt, add meg hány főre és milyen névre szóljon a foglalás.
+      </p>
+
+      <form id="reservation-form" class="form">
+        <div class="form-row">
+          <label for="res-name">Név</label>
+          <input type="text" id="res-name" name="name" required />
+        </div>
+        <div class="form-row">
+          <label for="res-email">E-mail</label>
+          <input type="email" id="res-email" name="email" required />
+        </div>
+        <div class="form-row">
+          <label for="res-phone">Telefonszám</label>
+          <input type="tel" id="res-phone" name="phone" />
+        </div>
+        <div class="form-row">
+          <label for="res-guests">Létszám (fő)</label>
+          <input type="number" id="res-guests" name="guests" min="1" value="2" required />
+        </div>
+        <div class="form-row">
+          <label for="res-notes">Megjegyzés</label>
+          <textarea id="res-notes" name="notes" rows="3" placeholder="Pl. ablak mellé, allergia, stb."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Asztal foglalása</button>
+      </form>
+
+      <div id="reservation-message" class="message" hidden></div>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="container footer-inner">
-      <div>© 2025 Wemender GJU · Minden jog fenntartva.</div>
-      <div class="footer-links">
-        <a href="/admin" target="_blank">Admin felület</a>
-      </div>
-    </div>
+  <footer class="site-footer">
+    <p>© Wemender GJU – Jegyrendszer</p>
   </footer>
-
-  <script src="main.js"></script>
 </body>
 </html>

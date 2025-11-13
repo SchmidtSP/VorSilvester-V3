@@ -2,90 +2,138 @@
 <html lang="hu">
 <head>
   <meta charset="UTF-8" />
-  <title>Admin · Wemender GJU Jegyek</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin felület – Wemender GJU</title>
   <link rel="stylesheet" href="styles.css" />
+  <script src="admin.js" defer></script>
 </head>
-<body class="admin-body">
-  <header class="topbar">
-    <div class="container topbar-inner">
-      <div class="logo">Admin · <span>Wemender GJU</span></div>
-      <nav class="nav">
-        <a href="#tickets">Jegyek</a>
-        <a href="#reservations">Asztalfoglalások</a>
-        <a href="#verify">QR ellenőrzés</a>
-      </nav>
+<body>
+  <header class="site-header">
+    <div class="logo">
+      <span class="logo-main">Wemender</span>
+      <span class="logo-sub">GJU</span>
     </div>
+    <nav class="nav">
+      <a href="index.html#tickets" class="btn btn-primary nav-btn">Főoldal</a>
+      <a href="my-tickets.html" class="btn btn-primary nav-btn">Saját jegyeim</a>
+    </nav>
   </header>
 
-  <main class="section">
-    <div class="container admin-grid">
-      <section id="tickets" class="card">
-        <h2>Jegyrendelések</h2>
-        <div class="table-wrapper">
-          <table>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Név</th>
-                <th>Email</th>
-                <th>Típus</th>
-                <th>Darab</th>
-                <th>Összeg (Ft)</th>
-                <th>Kód</th>
-                <th>Dátum</th>
-              </tr>
-            </thead>
-            <tbody id="tickets-body">
-              <tr><td colspan="8">Betöltés...</td></tr>
-            </tbody>
-          </table>
+  <main>
+    <section class="card narrow" id="admin-login-section">
+      <h2>Admin bejelentkezés</h2>
+      <form id="admin-login-form" class="form">
+        <div class="form-row">
+          <label for="admin-password">Admin jelszó</label>
+          <input type="password" id="admin-password" required />
         </div>
-      </section>
+        <button type="submit" class="btn btn-primary">Belépés</button>
+      </form>
+      <div id="admin-login-message" class="message" hidden></div>
+    </section>
 
-      <section id="reservations" class="card">
-        <h2>Asztalfoglalások</h2>
-        <div class="table-wrapper">
-          <table>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Név</th>
-                <th>Email</th>
-                <th>Telefon</th>
-                <th>Fő</th>
-                <th>Megjegyzés</th>
-                <th>Dátum</th>
-              </tr>
-            </thead>
-            <tbody id="reservations-body">
-              <tr><td colspan="7">Betöltés...</td></tr>
-            </tbody>
-          </table>
+    <section class="card" id="admin-panel" hidden>
+      <h2>Admin felület</h2>
+
+      <h3>Jegyek</h3>
+      <table class="data-table" id="tickets-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Név</th>
+            <th>E-mail</th>
+            <th>Típus</th>
+            <th>Mennyiség</th>
+            <th>Végösszeg</th>
+            <th>Kód</th>
+            <th>Műveletek</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <h4>Jegy hozzáadása / módosítása</h4>
+      <form id="ticket-admin-form" class="form inline-form">
+        <input type="hidden" id="admin-ticket-id" />
+        <div class="form-row">
+          <label for="admin-ticket-name">Név</label>
+          <input type="text" id="admin-ticket-name" required />
         </div>
-      </section>
+        <div class="form-row">
+          <label for="admin-ticket-email">E-mail</label>
+          <input type="email" id="admin-ticket-email" required />
+        </div>
+        <div class="form-row">
+          <label for="admin-ticket-type">Típus</label>
+          <select id="admin-ticket-type" required>
+            <option value="normal">Normál</option>
+            <option value="vip">VIP</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="admin-ticket-quantity">Menny.</label>
+          <input type="number" id="admin-ticket-quantity" min="1" value="1" required />
+        </div>
+        <div class="form-row">
+          <label for="admin-ticket-total">Végösszeg</label>
+          <input type="number" id="admin-ticket-total" min="1" required />
+        </div>
+        <div class="form-row form-row-buttons">
+          <button type="submit" class="btn btn-primary">Mentés</button>
+          <button type="button" id="admin-ticket-new" class="btn btn-secondary">Új</button>
+        </div>
+      </form>
 
-      <section id="verify" class="card">
-        <h2>Jegy ellenőrzése kóddal</h2>
-        <form id="verify-form" class="form-inline">
-          <input type="text" id="verify-code" placeholder="Jegy kódja (pl. a QR tartalma)" />
-          <button type="submit" class="btn-primary">Ellenőrzés</button>
-        </form>
-        <div id="verify-result"></div>
-        <p class="small">
-          Tipp: a QR-kód a <code>/verify/&lt;kód&gt;</code> URL-t tartalmazza. Ha telefonról
-          nyitod meg, egyből látod, hogy érvényes-e a jegy.
-        </p>
-      </section>
-    </div>
+      <hr />
+
+      <h3>Foglalások</h3>
+      <table class="data-table" id="reservations-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Név</th>
+            <th>E-mail</th>
+            <th>Telefon</th>
+            <th>Létszám</th>
+            <th>Megjegyzés</th>
+            <th>Műveletek</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <h4>Foglalás hozzáadása / módosítása</h4>
+      <form id="reservation-admin-form" class="form inline-form">
+        <input type="hidden" id="admin-res-id" />
+        <div class="form-row">
+          <label for="admin-res-name">Név</label>
+          <input type="text" id="admin-res-name" required />
+        </div>
+        <div class="form-row">
+          <label for="admin-res-email">E-mail</label>
+          <input type="email" id="admin-res-email" required />
+        </div>
+        <div class="form-row">
+          <label for="admin-res-phone">Telefon</label>
+          <input type="text" id="admin-res-phone" />
+        </div>
+        <div class="form-row">
+          <label for="admin-res-guests">Létszám</label>
+          <input type="number" id="admin-res-guests" min="1" value="2" required />
+        </div>
+        <div class="form-row">
+          <label for="admin-res-notes">Megjegyzés</label>
+          <input type="text" id="admin-res-notes" />
+        </div>
+        <div class="form-row form-row-buttons">
+          <button type="submit" class="btn btn-primary">Mentés</button>
+          <button type="button" id="admin-res-new" class="btn btn-secondary">Új</button>
+        </div>
+      </form>
+    </section>
   </main>
 
-  <footer class="footer">
-    <div class="container footer-inner">
-      <div>Admin felület · Wemender GJU</div>
-    </div>
+  <footer class="site-footer">
+    <p>© Wemender GJU – Admin</p>
   </footer>
-
-  <script src="admin.js"></script>
 </body>
 </html>

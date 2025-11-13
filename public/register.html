@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <title>Regisztráció – Wemender GJU</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="auth.js" defer></script>
+</head>
+<body data-page="register">
+  <header class="site-header">
+    <div class="logo">
+      <span class="logo-main">Wemender</span>
+      <span class="logo-sub">GJU</span>
+    </div>
+    <nav class="nav">
+      <a href="index.html#tickets" class="btn btn-primary nav-btn">Jegyvásárlás</a>
+      <a href="index.html#reservation" class="btn btn-primary nav-btn">Asztalfoglalás</a>
+      <a href="my-tickets.html" class="btn btn-primary nav-btn">Saját jegyeim</a>
+      <a href="login.html" class="btn btn-primary nav-btn">Bejelentkezés</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="card narrow">
+      <h2>Regisztráció</h2>
+
+      <form id="register-form" class="form">
+        <div class="form-row">
+          <label for="reg-email">E-mail</label>
+          <input type="email" id="reg-email" name="email" required />
+        </div>
+        <div class="form-row">
+          <label for="reg-password">Jelszó</label>
+          <input type="password" id="reg-password" name="password" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Regisztráció</button>
+      </form>
+
+      <div id="register-message" class="message" hidden></div>
+
+      <p class="small-text">
+        Már van fiókod?
+        <a href="login.html">Jelentkezz be itt</a>.
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© Wemender GJU</p>
+  </footer>
+</body>
+</html>

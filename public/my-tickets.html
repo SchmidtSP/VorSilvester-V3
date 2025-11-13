@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <title>Saját jegyeim – Wemender GJU</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="auth.js" defer></script>
+</head>
+<body data-page="my-tickets">
+  <header class="site-header">
+    <div class="logo">
+      <span class="logo-main">Wemender</span>
+      <span class="logo-sub">GJU</span>
+    </div>
+    <nav class="nav">
+      <a href="index.html#tickets" class="btn btn-primary nav-btn">Jegyvásárlás</a>
+      <a href="index.html#reservation" class="btn btn-primary nav-btn">Asztalfoglalás</a>
+      <a href="login.html" class="btn btn-primary nav-btn">Bejelentkezés</a>
+      <a href="register.html" class="btn btn-primary nav-btn">Regisztráció</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="card">
+      <div class="mytickets-header">
+        <h2>Saját jegyeim</h2>
+        <button id="logout-btn" class="btn btn-primary">Kijelentkezés</button>
+      </div>
+
+      <div id="mytickets-message" class="message"></div>
+
+      <div id="mytickets-list" class="ticket-list"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© Wemender GJU</p>
+  </footer>
+</body>
+</html>
